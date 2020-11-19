@@ -18,7 +18,7 @@ var strawberry = new Product('strawberry',"https://static.independent.co.uk/s3fs
 
 
 
-var displayTotal = document.getElementById("total")
+var displayTotalPrice = document.getElementById("total")
 //Array to keep track which items are present in cart to avoid clustering
 var addedToCart =[]
 var totalPrice = 0;
@@ -71,7 +71,8 @@ function addProductToCart(product)
         <div id="${product.name}price">&#8377; ${product.price}</div>
         <img src="${product.imgURL}" class="img-fluid float-right">
         `
-        cartList.appendChild(listItem)            
+        cartList.appendChild(listItem)
+        //the product name is pushed in addedToCart when new list node is created            
         addedToCart.push(product.name)
         calculateTotalPrice(product,"increment")
     }
@@ -83,8 +84,7 @@ function addProductToCart(product)
         updatedPrice.innerHTML=`Price: &#8377; ${product.quantity*product.price}`
         calculateTotalPrice(product,"increment")            
     }
-    displayTotal.innerHTML = `Total : &#8377; ${totalPrice}`
-
+    displayTotalPrice.innerHTML = `Total : &#8377; ${totalPrice}`
 }
 
 
@@ -101,7 +101,7 @@ function removeProduct(product)
         var updatedPrice=document.getElementById(`${product.name}price`);
         updatedPrice.innerHTML=`Price: &#8377; ${product.quantity*product.price}`;
         calculateTotalPrice(product,"decrement");        
-        displayTotal.innerHTML=`Total : &#8377; ${totalPrice}`;
+        displayTotalPrice.innerHTML=`Total : &#8377; ${totalPrice}`;
         //if statement which removes the item from list as well as from the addedToCart array
         if(product.quantity==0)
         {   
@@ -148,7 +148,7 @@ function decrementCartCount()
 
 document.addEventListener('DOMContentLoaded',()=>
 {   
-    displayTotal.textContent = "No items in cart"
+    displayTotalPrice.textContent = "No items in cart"
     
     addProducts();
 
@@ -171,10 +171,9 @@ document.addEventListener('DOMContentLoaded',()=>
                 {   
                     var inputProduct=event.target.previousElementSibling.id                   
                     removeProduct(eval(inputProduct))
-
                     if(cartCount==0)
                     {
-                        displayTotal.innerHTML="No items in cart"
+                        displayTotalPrice.innerHTML="No items in cart"
                     }
                     
                 } 
