@@ -10,3 +10,8 @@
 .dropdown-menu {
   width: 70vw;
 }
+
+.add-to-cart,
+.remove-from-cart {
+  font-size: 30px;
+}
